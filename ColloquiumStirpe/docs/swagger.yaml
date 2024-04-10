@@ -1,0 +1,83 @@
+definitions:
+  handler.CreateItemRequest:
+    properties:
+      codigo:
+        type: string
+      idLoja:
+        type: string
+      modelo:
+        type: string
+      tipo:
+        type: string
+      valor:
+        type: number
+    type: object
+  handler.CreateItemResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.ItemResponse'
+      message:
+        type: string
+    type: object
+  handler.ErrorResponse:
+    properties:
+      errorCode:
+        type: string
+      message:
+        type: string
+    type: object
+  schemas.ItemResponse:
+    properties:
+      codigo:
+        type: string
+      createdAt:
+        type: string
+      deteledAt:
+        type: string
+      id:
+        type: integer
+      idLoja:
+        type: string
+      modelo:
+        type: string
+      tipo:
+        type: string
+      updatedAt:
+        type: string
+      valor:
+        type: number
+    type: object
+info:
+  contact: {}
+paths:
+  /Item:
+    post:
+      consumes:
+      - application/json
+      description: Create a new job Item
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateItemRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CreateItemResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Create Item
+      tags:
+      - Items
+swagger: "2.0"
